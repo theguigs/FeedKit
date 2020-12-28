@@ -36,4 +36,5 @@ enum DateSpec {
     case rfc822
     case rfc3999
     case iso8601
+    case others
 }

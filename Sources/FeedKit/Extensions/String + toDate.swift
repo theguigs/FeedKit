@@ -36,6 +36,7 @@ extension String {
         case .rfc822:   return RFC822DateFormatter().date(from: self)
         case .rfc3999:  return RFC3339DateFormatter().date(from: self)
         case .iso8601:  return ISO8601DateFormatter().date(from: self)
+        case .others:  return OthersDateFormatter().date(from: self)
         }
     }
     
@@ -44,9 +45,10 @@ extension String {
     ///
     /// - Returns: A `Date` object, or nil if the conversion failed.
     func toPermissiveDate() -> Date? {
-        return RFC822DateFormatter().date(from: self) ??
-            (RFC3339DateFormatter().date(from: self) ??
-            ISO8601DateFormatter().date(from: self))
+        return RFC822DateFormatter().date(from: self)
+            ?? RFC3339DateFormatter().date(from: self)
+            ?? ISO8601DateFormatter().date(from: self)
+            ?? OthersDateFormatter().date(from: self)
     }
     
 }
